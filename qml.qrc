@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>DateCalculations.qml</file>
+        <file>PersianCalendar.qml</file>
+    </qresource>
+</RCC>
