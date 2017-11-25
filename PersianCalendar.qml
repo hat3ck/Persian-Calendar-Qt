@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
- import QtGraphicalEffects 1.0
+import QtGraphicalEffects 1.0
 
 Page {
 
@@ -270,9 +270,9 @@ Page {
         }
         if(gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].children[0].children[0].text!=="")
         {
-        gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].children[0].children[0].color="red";
-        gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.width=1;
-        gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.color="red";
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].children[0].children[0].color="red";
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.width=1;
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.color="red";
         }
         else{
             gridId.children[todayNumber].children[parseInt((todayDay/7)+2)].children[0].children[0].color="red";
@@ -287,15 +287,15 @@ Page {
         width: calWidth
         height: calverhor(1)
         gradient : Gradient {
-                GradientStop {
-                  position: 0.0
-                  color:gradStop1Color
-                }
-                GradientStop {
-                  position: 1.0
-                  color: gradStop2Color
-                }
-              }
+            GradientStop {
+                position: 0.0
+                color:gradStop1Color
+            }
+            GradientStop {
+                position: 1.0
+                color: gradStop2Color
+            }
+        }
         Rectangle{
             radius:calverhor(20)
             id:yearRectId
@@ -460,5 +460,5 @@ Page {
         }
 
         Component.onCompleted: createCells()
-}
+    }
 }
