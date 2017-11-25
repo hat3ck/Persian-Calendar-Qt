@@ -3,13 +3,13 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
  import QtGraphicalEffects 1.0
 
-Item {
+Page {
 
     DateCalculations{
         id:calc
     }
-    property var calWidth: mainPageId.width
-    property var calHeight: mainPageId.height
+    property var calWidth: parent.width
+    property var calHeight: parent.height
 
     property var yearRectColor: "#edf0f5"
     property var monthRectColor: "transparent"
@@ -42,12 +42,11 @@ Item {
     property var todayNumber: calc.dayNumber(todayYear,todayMonth,todayDay)
     property var todayName: calc.dayOfWeek(todayYear,todayMonth,todayDay)
 
+    property int cellMax:gridId.height/7
+    property int  maxPointSize: 20
 
-    function verhor(a){
-        return mainPageId.height > mainPageId.width ? mainPageId.height/a : mainPageId.width/a;
-    }
     function calverhor(a){
-        return calendarRect.height > calendarRect.width ? calendarRect.height/a : calendarRect.width/a;
+        return calHeight > calWidth ? calHeight/a : calWidth/a;
     }
     function nextMonth(){
         if(todayMonth==12)
@@ -115,16 +114,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -132,16 +134,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -149,16 +154,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -166,16 +174,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -183,16 +194,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -200,16 +214,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -217,16 +234,19 @@ Item {
                 Qt.createQmlObject('
                                             import QtQuick 2.0
         Rectangle{
-            width: gridId.width/7
+            width:  Math.min(cellMax,calverhor(7))
             height: width
             color:dayNumbersRectColor
             radius:100
+                        anchors.horizontalCenter: parent.horizontalCenter
             MouseArea{
                 anchors.fill: parent
                 onClicked: selectedCellChanged(children[0].text)
                 Text{
                     text: ""
-                    anchors.centerIn: parent
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+
                 }
             }
         }
@@ -248,16 +268,24 @@ Item {
             }
 
         }
+        if(gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].children[0].children[0].text!=="")
+        {
         gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].children[0].children[0].color="red";
         gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.width=1;
         gridId.children[todayNumber].children[parseInt((todayDay/7)+1)].border.color="red";
+        }
+        else{
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+2)].children[0].children[0].color="red";
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+2)].border.width=1;
+            gridId.children[todayNumber].children[parseInt((todayDay/7)+2)].border.color="red";
+        }
 
 
     }
     Rectangle{
         id : calendarRect
         width: calWidth
-        height: calHeight
+        height: calverhor(1)
         gradient : Gradient {
                 GradientStop {
                   position: 0.0
@@ -277,7 +305,7 @@ Item {
             Text {
                 id: yearTextId
                 text: todayName +" "+todayDay+" "+thisMonth+" "+todayYear
-                font.pointSize: yearPointSize
+                font.pointSize: Math.min(yearPointSize,maxPointSize)
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -321,7 +349,7 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 id: monthId
                 text: thisMonth
-                font.pointSize:monthPointSize
+                font.pointSize:Math.min(monthPointSize,maxPointSize*2)
             }
 
         }
@@ -335,7 +363,7 @@ Item {
                 id:saturdayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
 
 
@@ -351,7 +379,7 @@ Item {
                 id:sundayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(1)
@@ -364,7 +392,7 @@ Item {
                 id:mondayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(2)
@@ -377,7 +405,7 @@ Item {
                 id:tuesdayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(3)
@@ -390,11 +418,11 @@ Item {
                 id:wednesdayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(4)
-                        font.pointSize: daysNamePointSize
+                        font.pointSize: Math.min(daysNamePointSize,maxPointSize/1.5)
                         anchors.centerIn: parent
                     }
                 }
@@ -403,7 +431,7 @@ Item {
                 id:thursdayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(5)
@@ -416,12 +444,13 @@ Item {
                 id:fridayId
                 Rectangle{
                     width: gridId.width/7
-                    height: width
+                    height: calverhor(12)
                     color:dayNameRectColor
                     Text{
                         text: calc.dayName(6)
                         font.pointSize: daysNamePointSize
                         anchors.centerIn: parent
+
                     }
                 }
 
@@ -431,5 +460,5 @@ Item {
         }
 
         Component.onCompleted: createCells()
-    }
+}
 }
