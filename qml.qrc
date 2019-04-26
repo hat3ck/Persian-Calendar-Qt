@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>DateCalculations.qml</file>
         <file>PersianCalendar.qml</file>
+        <file>date-conversion.js</file>
+        <file>images/next.png</file>
     </qresource>
 </RCC>
